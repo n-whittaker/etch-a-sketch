@@ -35,19 +35,20 @@ function getRandomInt(max) {
 }
 
 
-function getRandomColor() {
-    let red = getRandomInt(255);
-    let green = getRandomInt(255);
-    let blue = getRandomInt(255);
+// function getRandomColor() {
+//     // Generate HSL colour
+//     let hue = getRandomInt(255);
+//     let saturation = getRandomInt(255);
+//     let b = getRandomInt(255);
 
-    return `rgb(${red}, ${green}, ${blue})`
-}
+//     return `rgb(${red}, ${green}, ${blue})`
+// }
 
-console.log(getRandomColor());
 
 
 function resetGrid(squaresPerSide) {
     currentSquares = squaresPerSide;
+
     while (container.firstChild) {   // Remove all previously created squares
         container.removeChild(container.firstChild);
     }
@@ -58,21 +59,32 @@ function resetGrid(squaresPerSide) {
 
     for (let i = 0; i < squaresTotal ** 2 ; i++) { // Make amount of squares requested
         let drawSquare = document.createElement("div"); // Create the sqaure and make it a certain dimension
+
         drawSquare.style.cssText = `width: ${squareSize}px; height: ${squareSize}px; border: 1px solid #ededed; `;
         drawSquare.classList.add("square");                // Give it an identifier
-        
         container.appendChild(drawSquare); // Add it to the container
     }
 
-    let squares = document.querySelectorAll(".square") // Selecting all the new squares 
+    let squares = document.querySelectorAll(".square"); // Selecting all the new squares 
+    let lightness = 100;
 
-
-    for (let i = 0; i < squares.length; i++) { // for every square in the node list 'squares', turn that square black when it's hovered over
+    for (let i = 0; i < squares.length; i++) { // for every square in the node list 'squares', turn that square a random colour when it's hovered over
         squares[i].addEventListener('mouseover', () => {
-            squares[i].style.backgroundColor = getRandomColor();
+            
+            // Change the color and make it a little darker each iteration, unless it's black, then make it back to light again.
+            if (lightness !== 0) {
+                lightness -= 5;
+                let randomColor = `hsl(${getRandomInt(360)}, ${getRandomInt(100)}%, ${lightness}%)`;
+                squares[i].style.backgroundColor = randomColor;
+                console.log(lightness)
+            } else {
+                lightness = 50;
+                let randomColor = `hsl(${getRandomInt(360)}, ${getRandomInt(100)}%, ${lightness}%)`;
+                squares[i].style.backgroundColor = randomColor; 
+            }
 
         })
     }
-    }
+    
 
-
+}
