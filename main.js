@@ -5,8 +5,6 @@ let containerWidthNum = parseInt(containerWidth.substring(0, 3), 10); // Getting
 let clearBtn = document.querySelector(".clear");
 let resolutionBtn = document.querySelector(".resolution");
 
-
-
 resetGrid(16); // User will see 16x16 grid when first opening the website
 
 clearBtn.addEventListener('click', () => { 
@@ -33,17 +31,6 @@ resolutionBtn.addEventListener('click', () => {
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
-
-
-// function getRandomColor() {
-//     // Generate HSL colour
-//     let hue = getRandomInt(255);
-//     let saturation = getRandomInt(255);
-//     let b = getRandomInt(255);
-
-//     return `rgb(${red}, ${green}, ${blue})`
-// }
-
 
 
 function resetGrid(squaresPerSide) {
@@ -76,15 +63,27 @@ function resetGrid(squaresPerSide) {
                 lightness -= 5;
                 let randomColor = `hsl(${getRandomInt(360)}, ${getRandomInt(100)}%, ${lightness}%)`;
                 squares[i].style.backgroundColor = randomColor;
-                console.log(lightness)
+                
             } else {
                 lightness = 50;
                 let randomColor = `hsl(${getRandomInt(360)}, ${getRandomInt(100)}%, ${lightness}%)`;
                 squares[i].style.backgroundColor = randomColor; 
             }
-
         })
     }
-    
+}
 
+
+let buttons = document.querySelectorAll("button");
+
+for (const btn of buttons) {
+    btn.addEventListener('mouseover', () => {
+        btn.style.cssText = 'background-color: rgb(183, 183, 183); border: 1px solid white; '
+    })
+}
+
+for (const btn of buttons) {
+    btn.addEventListener('mouseout', () => {
+        btn.style.cssText = 'background-color: white; border: 1px solid rgb(183, 183, 183); '
+    })
 }
