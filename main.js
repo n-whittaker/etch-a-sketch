@@ -30,6 +30,22 @@ resolutionBtn.addEventListener('click', () => {
 })
 
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+
+function getRandomColor() {
+    let red = getRandomInt(255);
+    let green = getRandomInt(255);
+    let blue = getRandomInt(255);
+
+    return `rgb(${red}, ${green}, ${blue})`
+}
+
+console.log(getRandomColor());
+
+
 function resetGrid(squaresPerSide) {
     currentSquares = squaresPerSide;
     while (container.firstChild) {   // Remove all previously created squares
@@ -53,7 +69,7 @@ function resetGrid(squaresPerSide) {
 
     for (let i = 0; i < squares.length; i++) { // for every square in the node list 'squares', turn that square black when it's hovered over
         squares[i].addEventListener('mouseover', () => {
-            squares[i].style.backgroundColor = 'black';
+            squares[i].style.backgroundColor = getRandomColor();
 
         })
     }
