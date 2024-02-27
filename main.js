@@ -7,7 +7,7 @@ let resolutionBtn = document.querySelector(".resolution");
 
 
 
-resetGrid(16);
+resetGrid(16); // User will see 16x16 grid when first opening the website
 
 clearBtn.addEventListener('click', () => { 
     let squares = document.querySelectorAll(".square");
@@ -17,7 +17,17 @@ clearBtn.addEventListener('click', () => {
     }
 })
 
-resolutionBtn.addEventListener('click', () => { resetGrid(prompt("how many squares per side should there be?")); })
+resolutionBtn.addEventListener('click', () => { 
+
+    let answer = prompt("Enter total sqaures along one side (0-100):");
+
+    while (answer > 100) {
+        answer = prompt("Enter a number between 0-100:")
+    }
+
+    resetGrid(answer); 
+
+})
 
 
 function resetGrid(squaresPerSide) {
